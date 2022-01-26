@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 import { scrapeNodeBlog } from './coordinators/scrapeNodeBlog'
 
 const NODE_BLOG_URL = 'https://nodejs.org/en/blog/'
