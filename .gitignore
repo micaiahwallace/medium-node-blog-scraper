@@ -1,2 +1,4 @@
 node_modules
 build
+cached-posts.json
+env.sh

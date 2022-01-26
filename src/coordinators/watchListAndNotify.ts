@@ -2,7 +2,7 @@ export interface ListWatchNotifierOptions<Item extends {}> {
   fetchOldItems: () => Promise<Item[]>
   fetchNewItems: () => Promise<Item[]>
   getNotifiableItems: (previous: Item[], next: Item[]) => Item[]
-  notify: (item: Item) => Promise<boolean>
+  notify: (item: Item) => Promise<void>
   log: (...messages: any[]) => void
 }
 
