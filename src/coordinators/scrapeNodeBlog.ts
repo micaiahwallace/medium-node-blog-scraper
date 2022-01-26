@@ -9,6 +9,7 @@ import { BlogPost } from '../types'
 
 interface ScrapeNodeBlogArgs {
   blogUrl: string
+  maxNotify: number
   writePostCache: (posts: BlogPost[]) => Promise<void>
   readPostCache: () => Promise<BlogPost[]>
   notify: (post: BlogPost) => Promise<void>
@@ -16,6 +17,7 @@ interface ScrapeNodeBlogArgs {
 
 export const scrapeNodeBlog = async ({
   blogUrl,
+  maxNotify,
   writePostCache,
   readPostCache,
   notify,
@@ -33,7 +35,7 @@ export const scrapeNodeBlog = async ({
     },
     getNotifiableItems: (cached, fresh) => {
       log('comparing cached and fresh posts to find which ones need notified')
-      return findNewBlogPosts(cached, fresh)
+      return findNewBlogPosts(cached, fresh, maxNotify)
     },
     notify: async (post) => {
       log(`New post found! ${post.title} posted at ${post.time}`)
