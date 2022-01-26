@@ -9,9 +9,7 @@ export const fetchNewBlogPosts = async (blogUrl: string): Promise<BlogPost[]> =>
   const nextPageLink = extractNodeNextPage(html)
   if (nextPageLink) {
     const nextPageUrl = new URL(nextPageLink, blogUrl).href
-    console.log("Fetching next page of posts.", nextPageUrl)
     return posts.concat(await fetchNewBlogPosts(nextPageUrl))
   }
-  // @todo - Persist posts to cache here
   return posts
 }
