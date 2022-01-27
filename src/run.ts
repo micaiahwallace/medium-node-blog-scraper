@@ -3,6 +3,7 @@ import { fetchCachedBlogPosts } from './coordinators/fetchCachedBlogPosts'
 import { scrapeNodeBlog } from './coordinators/scrapeNodeBlog'
 import { formatDate } from './logic/formatDate'
 import { ioWriteFileJson } from './services/ioWriteFile'
+import { log } from './services/log'
 import { sendTwilioMessage } from './services/sendTwilioMessage'
 
 // Configure the web scraper with these constants
@@ -18,7 +19,7 @@ const SMS_TO = process.env.SMS_TO ?? ''
 
 const requireStringVar = (v: string, msg: string) => {
   if (v === '') {
-    console.error(msg)
+    log(msg)
     process.exit(1)
   }
 }
@@ -27,6 +28,9 @@ requireStringVar(TWILIO_ACCOUNT_SID, 'TWILIO_SID missing in env')
 requireStringVar(TWILIO_AUTH_TOKEN, 'TWILIO_AUTH_TOKEN missing in env')
 requireStringVar(SMS_FROM, 'SMS_FROM missing in env')
 requireStringVar(SMS_TO, 'SMS_TO missing in env')
+
+const { version } = require('../package.json')
+log(`=== Node News Scraper (${version}) ===`)
 
 scrapeNodeBlog({
   maxNotify: MAX_NOTIFICATIONS,
