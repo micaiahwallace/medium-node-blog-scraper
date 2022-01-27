@@ -44,4 +44,3 @@ export const scrapeNodeBlog = async ({
     log,
   })
 }
-

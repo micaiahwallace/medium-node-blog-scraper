@@ -18,7 +18,10 @@ export const watchListAndNotify = async <T>({
 }: ListWatchNotifierOptions<T>): Promise<void> => {
   const old_items_promise = fetchOldItems()
   const new_items_promise = fetchNewItems()
-  const [old_items, new_items] = await Promise.allSettled([old_items_promise, new_items_promise])
+  const [old_items, new_items] = await Promise.allSettled([
+    old_items_promise,
+    new_items_promise,
+  ])
 
   if (old_items.status === 'rejected') {
     log('retrieving old items encountered an error', old_items.reason)
@@ -31,5 +34,5 @@ export const watchListAndNotify = async <T>({
   }
 
   const items_to_notify = getNotifiableItems(old_items.value, new_items.value)
-  await Promise.allSettled(items_to_notify.map(item => notify(item)))
+  await Promise.allSettled(items_to_notify.map((item) => notify(item)))
 }

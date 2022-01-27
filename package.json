@@ -10,10 +10,12 @@
   "scripts": {
     "start": "node build/run.js",
     "build": "tsc",
+    "format": "prettier --write src",
     "prepublish": "npm run build"
   },
   "devDependencies": {
     "@types/node": "^17.0.12",
+    "prettier": "^2.5.1",
     "typescript": "^4.5.5"
   },
   "dependencies": {

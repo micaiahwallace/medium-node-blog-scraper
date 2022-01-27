@@ -38,13 +38,12 @@ scrapeNodeBlog({
   blogUrl: NODE_BLOG_URL,
   readPostCache: () => fetchCachedBlogPosts(BLOG_POST_CACHE_FILE),
   writePostCache: (posts) => ioWriteFileJson(BLOG_POST_CACHE_FILE, posts),
-  notify: (post) => (
+  notify: (post) =>
     sendTwilioMessage(
-      TWILIO_ACCOUNT_SID, 
-      TWILIO_AUTH_TOKEN, 
-      SMS_FROM, 
-      SMS_TO, 
+      TWILIO_ACCOUNT_SID,
+      TWILIO_AUTH_TOKEN,
+      SMS_FROM,
+      SMS_TO,
       `\nNode news update!\n${post.title}\nposted at: ${formatDate(post.time)}`
-    )
-  ),
+    ),
 })

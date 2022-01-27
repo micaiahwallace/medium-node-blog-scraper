@@ -18,5 +18,7 @@ export const getValidatedBlogPost = (post: any): BlogPost | undefined => {
 
 export const getValidatedBlogPosts = (posts: any): BlogPost[] => {
   if (!Array.isArray(posts)) return []
-  return posts.map(post => getValidatedBlogPost(post)).filter(Boolean) as BlogPost[]
+  return posts
+    .map((post) => getValidatedBlogPost(post))
+    .filter(Boolean) as BlogPost[]
 }
