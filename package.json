@@ -3,9 +3,7 @@
   "version": "0.6.0",
   "main": "build/index.js",
   "license": "MIT",
-  "bin": {
-    "nodenews": "build/run.js"
-  },
+  "bin": "build/run.js",
   "files": [
     "build/**/*"
   ],
