@@ -8,5 +8,7 @@ export const findNewBlogPosts = (before: BlogPost[], after: BlogPost[], max: num
       newPosts.push(post)
     }
   })
-  return newPosts
+  
+  // Reversing will return the posts in correct time sort order for queueing notifications
+  return [...newPosts].reverse()
 }

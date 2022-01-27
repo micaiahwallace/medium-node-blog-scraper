@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 import { fetchCachedBlogPosts } from './coordinators/fetchCachedBlogPosts'
 import { scrapeNodeBlog } from './coordinators/scrapeNodeBlog'
+import { formatDate } from './logic/formatDate'
 import { ioWriteFileJson } from './services/ioWriteFile'
 import { sendTwilioMessage } from './services/sendTwilioMessage'
 
@@ -30,15 +31,15 @@ requireStringVar(SMS_TO, 'SMS_TO missing in env')
 scrapeNodeBlog({
   maxNotify: MAX_NOTIFICATIONS,
   blogUrl: NODE_BLOG_URL,
-  notify: (post) => {
-    return sendTwilioMessage(
+  readPostCache: () => fetchCachedBlogPosts(BLOG_POST_CACHE_FILE),
+  writePostCache: (posts) => ioWriteFileJson(BLOG_POST_CACHE_FILE, posts),
+  notify: (post) => (
+    sendTwilioMessage(
       TWILIO_ACCOUNT_SID, 
       TWILIO_AUTH_TOKEN, 
       SMS_FROM, 
       SMS_TO, 
-      `Node blog posted a new update! ${post.title} at ${post.time}`
+      `\nNode news update!\n${post.title}\nposted at: ${formatDate(post.time)}`
     )
-  },
-  readPostCache: () => fetchCachedBlogPosts(BLOG_POST_CACHE_FILE),
-  writePostCache: (posts) => ioWriteFileJson(BLOG_POST_CACHE_FILE, posts)
+  ),
 })
