@@ -1,9 +1,6 @@
-import { fetchCachedBlogPosts } from './fetchCachedBlogPosts'
 import { fetchNewBlogPosts } from './fetchNewBlogPosts'
 import { watchListAndNotify } from './watchListAndNotify'
 import { findNewBlogPosts } from '../logic/findNewBlogPosts'
-import { ioWriteFileJson } from '../services/ioWriteFile'
-import { sendTwilioMessage } from '../services/sendTwilioMessage'
 import { log } from '../services/log'
 import { BlogPost } from '../types'
 
